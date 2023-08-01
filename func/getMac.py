@@ -9,12 +9,13 @@ sys.path.append('/home/aritra/KaBooM/deja VU/python-test/fastapi-test-p39-v2/')
 def get_mac():
     mac = str(uuid.getnode())
     hash = hashlib.sha256(mac.encode()).hexdigest()
-    hash = hash[:6]
+    hash_six = hash[:6]
     # fold_id = open(".sec/fold_id.aspic", "r", encoding='utf-8')
     # print(fold_id.read())
     with open(".sec/fold_id.aspic", "w", encoding='utf-8') as id:
-        id.write(hash)
-    return hash
+        id.write(hash_six)
+    # send multiple values in response
+    return hash_six, hash
 
 # get_mac()
 
