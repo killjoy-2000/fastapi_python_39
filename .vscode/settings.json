@@ -3,6 +3,10 @@
         "aritra",
         "fastapi",
         "pydantic",
+        "rcode",
+        "respdata",
+        "respstatus",
+        "rmsg",
         "uvicorn"
     ]
 }
