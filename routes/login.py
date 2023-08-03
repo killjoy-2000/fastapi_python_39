@@ -16,6 +16,7 @@ class body(BaseModel):
     d_id: str
     user: str
     user_id: str
+    image_no: int
 
 # class response(BaseModel):
 #     status: str
@@ -24,7 +25,7 @@ class body(BaseModel):
 router = APIRouter()
 
 # res = json.dumps(res)
-@router.get("/login")
+@router.post("/login")
 async def login(fid: fid, body: body):
     # define all variable
     res = {
@@ -34,6 +35,11 @@ async def login(fid: fid, body: body):
         },
         "respdata" : {        
         }
+    }
+    payload = {
+        "user" : body.user,
+        "used id" : body.user_id,
+        "image" : body.image_no
     }
     token = ""
     # rcode = "000"
@@ -55,7 +61,7 @@ async def login(fid: fid, body: body):
             print("success")
             # here send the payload as json
             try:
-                token = auth.get_token({"payload" :body.user+body.user_id})
+                token = auth.get_token(payload)
                 res["respdata"]["token"] = token
             except Exception as e:
                 print(str(e))
