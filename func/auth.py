@@ -29,3 +29,21 @@ def generate_token():
     token = jwt.encode({"":getMac.get_mac()[1]}, getMac.get_mac()[0], algorithm="HS256")
     return token
 # print(generate_token())
+
+def validate_token(token):
+    res = {
+        "status" : bool,
+        "body": str
+    }
+    try:
+        val = jwt.decode(token, getMac.get_mac()[1], algorithms="HS256")
+        res["status"] = True
+        res["body"] = val
+        return res
+    except Exception as e:
+        print(str(e))
+        res["status"] = False
+        res["body"] = str(e)
+        return res
+
+    # return val
