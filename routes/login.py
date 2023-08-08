@@ -16,7 +16,7 @@ class body(BaseModel):
     d_id: str
     user: str
     user_id: str
-    image_no: int
+    image_no: Union[int, None] = None
 
 # class response(BaseModel):
 #     status: str
