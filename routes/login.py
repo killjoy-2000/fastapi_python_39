@@ -1,13 +1,16 @@
 import json
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 from typing import Union
 from pydantic import BaseModel
+import asyncio
+# import openpyxl
 
 # add the parent folder path
 import sys
 sys.path.append('/home/aritra/KaBooM/deja VU/python-test/fastapi-test-p39-v2/')
 from func import getMac
 from func import auth
+from session import activity
 
 # class body(BaseModel):
 class fid(BaseModel):
@@ -24,9 +27,12 @@ class body(BaseModel):
 
 router = APIRouter()
 
+
 # res = json.dumps(res)
 @router.post("/login")
-async def login(fid: fid, body: body):
+async def login(fid: fid, body: body, request: Request):
+    s = activity.check_sts(request.client.host)
+    print(s)
     # define all variable
     res = {
         "respstatus":{
@@ -39,7 +45,8 @@ async def login(fid: fid, body: body):
     payload = {
         "user" : body.user,
         "used id" : body.user_id,
-        "image" : body.image_no
+        "image" : body.image_no,
+        "ip": request.client.host
     }
     token = ""
     # rcode = "000"
