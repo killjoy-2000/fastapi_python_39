@@ -1,6 +1,7 @@
 import jwt
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
+from typing import Union
 
 import sys
 sys.path.append('/home/aritra/KaBooM/deja VU/python-test/fastapi-test-p39-v2/')
@@ -11,7 +12,14 @@ def get_token(payload):
     # print(type(payload))
 
     # pay = json.dumps(payload.__dict__)
-    token = jwt.encode(payload, str(getMac.get_mac()[1]), algorithm="HS256")
+    # payload['exp'] = int
+    body = {
+        "exp" : datetime.utcnow() + timedelta(seconds=60),
+        "body" : payload,
+        "time" : str(datetime.now())
+    }
+
+    token = jwt.encode(body, str(getMac.get_mac()[1]), algorithm="HS256")
     return token
 # print(get_token())
 
