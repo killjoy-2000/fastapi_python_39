@@ -19,7 +19,7 @@ def get_token(payload):
         "time" : str(datetime.now())
     }
 
-    token = jwt.encode(body, str(getMac.get_mac()[1]), algorithm="HS256")
+    token = jwt.encode(body, str(getMac.get_mac()[1])+datetime.today().strftime("%Y-%m-%d"), algorithm="HS256")
     return token
 # print(get_token())
 
@@ -44,7 +44,7 @@ def validate_token(token):
         "body": str
     }
     try:
-        val = jwt.decode(token, getMac.get_mac()[1], algorithms="HS256")
+        val = jwt.decode(token, str(getMac.get_mac()[1])+datetime.today().strftime("%Y-%m-%d"), algorithms="HS256")
         res["status"] = True
         res["body"] = val
         return res
