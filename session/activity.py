@@ -24,9 +24,11 @@ try:
             for cell in col:
                 if cell.value == search_value:
                     # cell.value = None
-                    sheet.delete_rows(cell.row, 1)
-                    wb.save("test_xl_py.xlsx")
-                    return "delete >>>>>>"
+                    # sheet.delete_rows(cell.row, 1)
+                    # wb.save("test_xl_py.xlsx")
+                    # if row[1].value == "T":
+                    #     row[1].value = "F"
+                    return True
                 # else:
             put_data = {
                     "A": search_value,
@@ -35,7 +37,7 @@ try:
                 }
             sheet.append(put_data)
             wb.save("test_xl_py.xlsx")
-            return "data inserted"
+            return False
         except Exception as e:
             print(str(e))
             return str(e)

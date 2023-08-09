@@ -48,6 +48,10 @@ async def login(fid: fid, body: body, request: Request):
         "image" : body.image_no,
         "ip": request.client.host
     }
+    if(s):
+        res["respstatus"]["rcode"] = "100"
+        res["respstatus"]["rmsg"] = "can not login again"
+        return res
     token = ""
     # rcode = "000"
     # rmsg = ""
