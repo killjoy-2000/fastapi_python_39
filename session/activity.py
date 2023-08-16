@@ -72,15 +72,8 @@ try:
         try:
             for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=3):  # Assuming headers are in the first row
                 # column_a_value = row[0]
-                if row[0].value is not None:
-                    # # row = list(row)
-                    # row[1] = 'F'  # Column B
-                    # # row[2] = 'F'  # Column C
-                    # # row = tuple(row)
-                    # # sheet.append(row)
-                    # wb.save("test_xl_py.xlsx")
-                    # print("data found")
-                    row[1].value = 'F'  # Update value in column B
+                if row[0].value is not None:                   
+                    row[1].value = 'F' 
                     row[2].value = 'F'
                 wb.save("test_xl_py.xlsx")
                 return "data activity formatted"
