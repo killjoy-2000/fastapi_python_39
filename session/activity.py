@@ -109,6 +109,25 @@ try:
         except Exception as e:
             print(str(e))
             return str(e)
+    
+    def change_activity(ip):
+        try:
+            search_val = ip
+            found_cells = []
+            for row in sheet.iter_rows(min_row=1):
+                column_a_val = row[0].value
+                column_b_val = row[1].value
+                
+                if column_a_val == search_val:
+                    # login_sts = column_b_val/
+                    row[1].value = 'F'
+                    wb.save("test_xl_py.xlsx")
+                    wb.close()
+                    return "data changed"
+                    
+        except Exception as e:
+            print(str(e))
+            return str(e)
 
 
 

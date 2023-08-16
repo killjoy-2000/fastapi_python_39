@@ -2,10 +2,12 @@ import jwt
 import json
 from datetime import datetime, timedelta
 from typing import Union
+import openpyxl
 
 import sys
 sys.path.append('/home/aritra/KaBooM/deja VU/python-test/fastapi-test-p39-v2/')
 from func import getMac
+from session import activity
 
 
 def get_token(payload):
@@ -38,7 +40,7 @@ def generate_token():
     return token
 # print(generate_token())
 
-def validate_token(token):
+def validate_token(token,ip):
     res = {
         "status" : bool,
         "body": str
@@ -50,6 +52,7 @@ def validate_token(token):
         return res
     except Exception as e:
         print(str(e))
+        activity.change_activity(ip)
         res["status"] = False
         res["body"] = str(e)
         return res
