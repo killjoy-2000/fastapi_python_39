@@ -70,17 +70,24 @@ try:
 
     def clear_activity():
         try:
-            for row in sheet.iter_rows(min_row=1):  # Assuming headers are in the first row
-                column_a_value = row[0].value
-                if column_a_value:
-                    row[1].value = 'F'  # Column B
-                    row[2].value = 'F'  # Column C
-            return "data activity formatted"
+            for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=3):  # Assuming headers are in the first row
+                # column_a_value = row[0]
+                if row[0].value is not None:
+                    # # row = list(row)
+                    # row[1] = 'F'  # Column B
+                    # # row[2] = 'F'  # Column C
+                    # # row = tuple(row)
+                    # # sheet.append(row)
+                    # wb.save("test_xl_py.xlsx")
+                    # print("data found")
+                    row[1].value = 'F'  # Update value in column B
+                    row[2].value = 'F'
+                wb.save("test_xl_py.xlsx")
+                return "data activity formatted"
         except Exception as e:
             print(str(e))
             return str(e)
         finally:
-            wb.save("test_xl_py.xlsx")
             wb.close()
     
     def check_sts(ip):
@@ -88,7 +95,7 @@ try:
         try:
             search_val = ip
             found_cells = []
-            for row in sheet.iter_rows(min_row=1):
+            for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=3):
                 column_a_val = row[0].value
                 column_b_val = row[1].value
                 
@@ -104,7 +111,17 @@ try:
                         row[1].value = 'T'
                         wb.save("test_xl_py.xlsx")
                         wb.close()
-                        return "not available"                        
+                        return "not available"
+                # elif column_a_val != search_val:
+            put_data = {
+                "A": ip,
+                "B" : "T",
+                "C" : "T",
+            }
+            sheet.append(put_data)
+            wb.save("test_xl_py.xlsx")
+            wb.close()
+            return "new_data_added"
 
         except Exception as e:
             print(str(e))
@@ -114,7 +131,7 @@ try:
         try:
             search_val = ip
             found_cells = []
-            for row in sheet.iter_rows(min_row=1):
+            for row in sheet.iter_rows(min_row=2, max_row=sheet.max_row, min_col=1, max_col=3):
                 column_a_val = row[0].value
                 column_b_val = row[1].value
                 
@@ -124,7 +141,7 @@ try:
                     wb.save("test_xl_py.xlsx")
                     wb.close()
                     return "data changed"
-                    
+
         except Exception as e:
             print(str(e))
             return str(e)
