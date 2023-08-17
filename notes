@@ -7,3 +7,5 @@ B = user login
 C = 
 
 in openpyxl to get the value of any row donot use row[0].value, use only row[0]
+
+TODO: store all generated tokens in a file. check if token is already in use. reset token file when server restarts

@@ -16,7 +16,7 @@ def get_token(payload):
     # pay = json.dumps(payload.__dict__)
     # payload['exp'] = int
     body = {
-        "exp" : datetime.utcnow() + timedelta(seconds=60),
+        "exp" : datetime.utcnow() + timedelta(seconds=3600),
         "body" : payload,
         "time" : str(datetime.now())
     }
